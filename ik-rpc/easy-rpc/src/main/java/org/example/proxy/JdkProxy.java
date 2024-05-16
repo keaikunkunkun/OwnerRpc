@@ -28,7 +28,7 @@ public class JdkProxy implements InvocationHandler {
         //发送请求
         try {
             byte[] bytes = serializer.serialize(rpcRequest);
-            try(HttpResponse response = HttpRequest.post("http://localhost:8080")
+            try(HttpResponse response = HttpRequest.post("http://localhost:8081")
                     .body(bytes)
                     .execute()){
                     byte[] bodyBytes = response.bodyBytes();

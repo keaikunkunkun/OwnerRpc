@@ -8,20 +8,17 @@ import org.example.service.UserService;
 public class EasyConsumerExample {
     public static void main(String[] args) {
         //动态代理获取的UserService
-        UserService userService1 = JdkProxyFactory.getProxy(UserService.class);
-        //静态代理获取的UserService
-//        UserServiceProxy userServiceProxy = new UserServiceProxy();
-//        UserService userService = null;
+        UserService userService = JdkProxyFactory.getProxy(UserService.class);
         User user = new User();
         user.setName("ikun1");
-        User userName = userService1.getUserName(user);
-        if(userName!=null){
+        User userName = userService.getUserName(user);
+        if(userName != null){
             System.out.println(userName.getName());
         }else {
             System.out.println("userName==null");
         }
-
-
+        short number = userService.getNumber();
+        System.out.println(number + "number");
     }
 
 

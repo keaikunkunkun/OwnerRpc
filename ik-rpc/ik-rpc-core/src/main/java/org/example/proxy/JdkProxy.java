@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 public class JdkProxy implements InvocationHandler {
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //初始化序列器
@@ -28,7 +29,7 @@ public class JdkProxy implements InvocationHandler {
         //发送请求
         try {
             byte[] bytes = serializer.serialize(rpcRequest);
-            try(HttpResponse response = HttpRequest.post("http://localhost:8080")
+            try(HttpResponse response = HttpRequest.post("localhost:8081")
                     .body(bytes)
                     .execute()){
                     byte[] bodyBytes = response.bodyBytes();

@@ -5,6 +5,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.example.model.RpcRequest;
 import org.example.model.RpcResponse;
 import org.example.registry.LocalRegistry;
@@ -14,6 +15,7 @@ import org.example.serializer.Serializer;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+@Slf4j
 public class HttpServerHandler implements Handler<HttpServerRequest> {
 
     //自定义服务处理器
@@ -24,6 +26,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
         //输出相应日志
         System.out.println("Received request from : " + httpServerRequest.method() + httpServerRequest.uri() + "wangu");
         System.out.println("nhaoyaassss");
+        log.info("nhao");
         //异步处理HTTP请求
         httpServerRequest.bodyHandler( body -> {
             byte[] bytes = body.getBytes();

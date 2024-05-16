@@ -13,4 +13,7 @@ public class RpcConfig {
     private String name = "ik";
     //版本号
     private String version = "1.0";
+
+    //是否开启mock数据
+    private boolean mock = false;
 }
