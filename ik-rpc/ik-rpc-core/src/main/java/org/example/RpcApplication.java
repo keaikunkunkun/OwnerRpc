@@ -3,6 +3,7 @@ package org.example;
 import lombok.extern.slf4j.Slf4j;
 import org.example.config.RpcConfig;
 import org.example.constant.RpcConstant;
+import org.example.serializer.Serializer;
 import org.example.utils.ConfigUtil;
 
 @Slf4j
@@ -19,6 +20,8 @@ public class RpcApplication {
     }
     public static void init(){
         RpcConfig newRpcConfig;
+        Class<Serializer> serializerClass = Serializer.class;
+        String name = serializerClass.getName();
         try{
             newRpcConfig = ConfigUtil.loadConfig(RpcConfig.class, RpcConstant.DEFAULT_CONFIG_PREFIX);
         }catch (Exception e){

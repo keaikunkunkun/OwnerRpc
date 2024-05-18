@@ -1,24 +1,28 @@
 package org.example.proxy;
 
 
-
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+
+import org.example.RpcApplication;
 import org.example.model.RpcRequest;
 import org.example.model.RpcResponse;
 import org.example.serializer.JdkSerializer;
 import org.example.serializer.Serializer;
+import org.example.serializer.SerializerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+
 
 public class JdkProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //初始化序列器
-        Serializer serializer = new JdkSerializer();
+//        Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         //构造请求
         RpcRequest rpcRequest = RpcRequest.builder()
                 .serviceName(method.getDeclaringClass().getName())
@@ -35,7 +39,6 @@ public class JdkProxy implements InvocationHandler {
                     byte[] bodyBytes = response.bodyBytes();
                     RpcResponse rpcResponse = serializer.deserialize(bodyBytes, RpcResponse.class);
                     return rpcResponse.getResult();
-
             }
         } catch (IOException e) {
         e.printStackTrace();

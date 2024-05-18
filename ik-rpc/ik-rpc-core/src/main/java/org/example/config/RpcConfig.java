@@ -1,6 +1,7 @@
 package org.example.config;
 
 import lombok.Data;
+import org.example.serializer.SerializerKeys;
 
 @Data
 public class RpcConfig {
@@ -16,4 +17,6 @@ public class RpcConfig {
 
     //是否开启mock数据
     private boolean mock = false;
+
+    private String serializer = SerializerKeys.JDK;
 }
